@@ -89,16 +89,16 @@ module.exports = (robot) ->
       message = if reason?
                   if reasonScore == 1 or reasonScore == -1
                     if score == 1 or score == -1
-                      "#{name} has #{score} point for #{reason}."
+                      "#{from} has #{score} point for #{reason}."
                     else
-                      "#{name} has #{score} points, #{reasonScore} of which is for #{reason}."
+                      "#{from} has #{score} points, #{reasonScore} of which is for #{reason}."
                   else
-                    "#{name} has #{score} points, #{reasonScore} of which are for #{reason}."
+                    "#{from} has #{score} points, #{reasonScore} of which are for #{reason}."
                 else
                   if score == 1
-                    "#{name} has #{score} point"
+                    "#{from} has #{score} point"
                   else
-                    "#{name} has #{score} points"
+                    "#{from} has #{score} points"
 
 
       msg.send message
