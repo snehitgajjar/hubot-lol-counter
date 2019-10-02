@@ -61,37 +61,35 @@ module.exports = (robot) ->
     from = msg.message.user.name.toLowerCase()
     room = msg.message.room
 
-    console.log "Hello, #{lolWord}!"
-    test = lolWord == "lol"
-    console.log "Hello1, #{test}!"
-    # do some sanitizing
-    # reason = reason?.trim().toLowerCase()
+    if lolWord
+      # do some sanitizing
+      # reason = reason?.trim().toLowerCase()
 
-    # if name
-    #   if name.charAt(0) == ':'
-    #     name = (name.replace /(^\s*@)|([,\s]*$)/g, '').trim().toLowerCase()
-    #   else
-    #     name = (name.replace /(^\s*@)|([,:\s]*$)/g, '').trim().toLowerCase()
+      # if name
+      #   if name.charAt(0) == ':'
+      #     name = (name.replace /(^\s*@)|([,\s]*$)/g, '').trim().toLowerCase()
+      #   else
+      #     name = (name.replace /(^\s*@)|([,:\s]*$)/g, '').trim().toLowerCase()
 
-    # # check whether a name was specified. use MRU if not
-    # unless name? && name != ''
-    #   [name, lastReason] = scoreKeeper.last(room)
-    #   reason = lastReason if !reason? && lastReason?
+      # # check whether a name was specified. use MRU if not
+      # unless name? && name != ''
+      #   [name, lastReason] = scoreKeeper.last(room)
+      #   reason = lastReason if !reason? && lastReason?
 
-    # do the {up, down}vote, and figure out what the new score is
+      # do the {up, down}vote, and figure out what the new score is
 
-    [userName, reasonScore] = if lolWord.toLowerCase() == "lol"
-              scoreKeeper.add(from, room, reason)
+      [userName, reasonScore] = if lolWord.toLowerCase() == "lol"
+                scoreKeeper.add(from, room, reason)
 
 
-    # if we got a score, then display all the things and fire off events!
-    if reasonScore?
-      message = if reasonScore == 1
-                  "#{msg.message.user.name}: #{reasonScore}"
-                else
-                  "#{msg.message.user.name}: #{reasonScore}"
+      # if we got a score, then display all the things and fire off events!
+      if reasonScore?
+        message = if reasonScore == 1
+                    "#{msg.message.user.name}: #{reasonScore}"
+                  else
+                    "#{msg.message.user.name}: #{reasonScore}"
 
-      msg.send message
+        msg.send message
 
   robot.respond ///
     (?:erase )
