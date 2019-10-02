@@ -41,7 +41,7 @@ class ScoreKeeper
     @saveScoreLog(from, room, reason)
     @robot.brain.save()
 
-    [@storage.scores[from], "none"]
+    [from, @storage.scores[from]]
 
   add: (from, room, reason) ->
     if @validate("lol", from)

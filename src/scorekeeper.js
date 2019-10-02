@@ -45,7 +45,7 @@
     ScoreKeeper.prototype.saveUser = function(from, room, reason) {
       this.saveScoreLog(from, room, reason);
       this.robot.brain.save();
-      return [this.storage.scores[from], "none"];
+      return [from, this.storage.scores[from]];
     };
 
     ScoreKeeper.prototype.add = function(from, room, reason) {
