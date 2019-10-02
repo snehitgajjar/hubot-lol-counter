@@ -1,5 +1,5 @@
 {
-  "name": "hubot-plusplus",
+  "name": "hubot-lol-counter",
   "version": "1.4.0",
   "description": "A hubot script for adding or removing points",
   "main": "index.coffee",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ajacksified/hubot-plusplus.git"
+    "url": "git://github.com/snehitgajjar/hubot-lol-counter.git"
   },
   "keywords": [
     "hubot",
@@ -16,10 +16,10 @@
     "plus",
     "karma"
   ],
-  "author": "Jack Lawson <https://github.com/ajacksified>",
+  "author": "Jack Lawson <https://github.com/snehitgajjar>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ajacksified/hubot-plusplus/issues"
+    "url": "https://github.com/snehitgajjar/hubot-lol-counter/issues"
   },
   "dependencies": {
     "coffee-script": "~1.6",

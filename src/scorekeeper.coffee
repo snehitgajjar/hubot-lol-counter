@@ -8,7 +8,7 @@
 # Commands:
 #
 # Author:
-#   ajacksified
+#   snehitgajjar
 class ScoreKeeper
   constructor: (@robot) ->
     storageLoaded = =>
@@ -31,15 +31,15 @@ class ScoreKeeper
     @storage.reasons[user] ||= {}
     user
 
-  saveUser: (user, from, room, reason) ->
-    @saveScoreLog(user, from, room, reason)
+  saveUser: (from, room, reason) ->
+    @saveScoreLog(from, room, reason)
     @robot.brain.save()
 
     [@storage.scores[user], @storage.reasons[user][reason] || "none"]
 
-  add: (user, from, room, reason) ->
+  add: (from, room, reason) ->
     if @validate(user, from)
-      user = @getUser(user)
+      user = @getUser('lol')
       @storage.scores[user]++
       @storage.reasons[user] ||= {}
 
@@ -47,7 +47,7 @@ class ScoreKeeper
         @storage.reasons[user][reason] ||= 0
         @storage.reasons[user][reason]++
 
-      @saveUser(user, from, room, reason)
+      @saveUser(from, room, reason)
     else
       [null, null]
 
@@ -87,11 +87,11 @@ class ScoreKeeper
     user = @getUser(user)
     @storage.reasons[user]
 
-  saveScoreLog: (user, from, room, reason) ->
+  saveScoreLog: (from, room, reason) ->
     unless typeof @storage.log[from] == "object"
       @storage.log[from] = {}
 
-    @storage.log[from][user] = new Date()
+    @storage.log[from]['lol'] = new Date()
     @storage.last[room] = {user: user, reason: reason}
 
   last: (room) ->

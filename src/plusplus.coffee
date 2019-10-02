@@ -28,7 +28,7 @@
 #   /hubot/scores[?name=<name>][&direction=<top|botton>][&limit=<10>]
 #
 # Author:
-#   ajacksified
+#   snehitgajjar
 
 
 _ = require('underscore')
@@ -46,40 +46,38 @@ module.exports = (robot) ->
   robot.hear ///
     # from beginning of line
     ^
-    # the thing being upvoted, which is any number of words and spaces
-    ([\s\w'@.\-:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0]*)
+    .*
     # allow for spaces after the thing being upvoted (@user ++)
-    \s*
+    \s+
     # the increment/decrement operator ++ or --
-    (\+\+|--|—)
+    (lol)
     # optional reason for the plusplus
     (?:\s+(?:#{reasonConjunctions})\s+(.+))?
     $ # end of line
   ///i, (msg) ->
     # let's get our local vars in place
-    [dummy, name, operator, reason] = msg.match
+    # [dummy, name, operator, reason] = msg.match
+    [lolWord, reason] = msg.match
     from = msg.message.user.name.toLowerCase()
     room = msg.message.room
 
     # do some sanitizing
     reason = reason?.trim().toLowerCase()
 
-    if name
-      if name.charAt(0) == ':'
-        name = (name.replace /(^\s*@)|([,\s]*$)/g, '').trim().toLowerCase()
-      else
-        name = (name.replace /(^\s*@)|([,:\s]*$)/g, '').trim().toLowerCase()
+    # if name
+    #   if name.charAt(0) == ':'
+    #     name = (name.replace /(^\s*@)|([,\s]*$)/g, '').trim().toLowerCase()
+    #   else
+    #     name = (name.replace /(^\s*@)|([,:\s]*$)/g, '').trim().toLowerCase()
 
-    # check whether a name was specified. use MRU if not
-    unless name? && name != ''
-      [name, lastReason] = scoreKeeper.last(room)
-      reason = lastReason if !reason? && lastReason?
+    # # check whether a name was specified. use MRU if not
+    # unless name? && name != ''
+    #   [name, lastReason] = scoreKeeper.last(room)
+    #   reason = lastReason if !reason? && lastReason?
 
     # do the {up, down}vote, and figure out what the new score is
-    [score, reasonScore] = if operator == "++"
-              scoreKeeper.add(name, from, room, reason)
-            else
-              scoreKeeper.subtract(name, from, room, reason)
+    [score, reasonScore] = if operator.toLowerCase() == "lol"
+              scoreKeeper.add(from, room, reason)
 
     # if we got a score, then display all the things and fire off events!
     if score?
@@ -101,8 +99,8 @@ module.exports = (robot) ->
       msg.send message
 
       robot.emit "plus-one", {
-        name:      name
-        direction: operator
+        name:      from
+        direction: '++'
         room:      room
         reason:    reason
         from:      from
