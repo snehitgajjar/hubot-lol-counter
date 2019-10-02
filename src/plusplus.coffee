@@ -46,13 +46,13 @@ module.exports = (robot) ->
   robot.hear ///
     # from beginning of line
     ^
-    .*
+    (.
     # allow for spaces after the thing being upvoted (@user ++)
-    \s*
+    *?
     # the increment/decrement operator ++ or --
-    (lol)
+    (\blol\b)
     # optional reason for the plusplus
-    (?:\s+(?:#{reasonConjunctions})\s+(.+))?
+    [^$]*)$
     $ # end of line
   ///i, (msg) ->
     # let's get our local vars in place
