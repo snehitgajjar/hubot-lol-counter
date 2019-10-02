@@ -17,17 +17,16 @@
     reasonsKeyword = process.env.HUBOT_PLUSPLUS_REASONS || 'raisins';
     reasonConjunctions = process.env.HUBOT_PLUSPLUS_CONJUNCTIONS || 'for|because|cause|cuz|as';
     robot.hear(/^(.*?(\blol\b)[^$]*)$/i, function(msg) {
-      var from, lolWord, message, reason, reasonScore, room, test, userName, _ref, _ref1;
+      var from, lolWord, message, reason, reasonScore, room, userName, _ref, _ref1;
       _ref = msg.match, reason = _ref[0], lolWord = _ref[1];
       from = msg.message.user.name.toLowerCase();
       room = msg.message.room;
-      console.log("Hello, " + lolWord + "!");
-      test = lolWord === "lol";
-      console.log("Hello1, " + test + "!");
-      _ref1 = lolWord.toLowerCase() === "lol" ? scoreKeeper.add(from, room, reason) : void 0, userName = _ref1[0], reasonScore = _ref1[1];
-      if (reasonScore != null) {
-        message = reasonScore === 1 ? "" + msg.message.user.name + ": " + reasonScore : "" + msg.message.user.name + ": " + reasonScore;
-        return msg.send(message);
+      if (lolWord) {
+        _ref1 = lolWord.toLowerCase() === "lol" ? scoreKeeper.add(from, room, reason) : void 0, userName = _ref1[0], reasonScore = _ref1[1];
+        if (reasonScore != null) {
+          message = reasonScore === 1 ? "" + msg.message.user.name + ": " + reasonScore : "" + msg.message.user.name + ": " + reasonScore;
+          return msg.send(message);
+        }
       }
     });
     robot.respond(/(?:erase)([\s\w'@.-:\u3040-\u30FF\uFF01-\uFF60\u4E00-\u9FA0]*)(?:\s+(?:for|because|cause|cuz)\s+(.+))?$/i, function(msg) {
