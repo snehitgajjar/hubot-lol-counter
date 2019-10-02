@@ -4,7 +4,7 @@
   "description": "A hubot script for adding or removing points",
   "main": "index.coffee",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script --recursive ./test"
+    "test": "mocha coffee:coffee-script/register ./test/plusplus.coffee"
   },
   "repository": {
     "type": "git",
@@ -27,9 +27,11 @@
     "clark": "0.0.6"
   },
   "devDependencies": {
-    "mocha": "*",
+    "babel-register": "^6.26.0",
     "chai": "*",
-    "sinon-chai": "*",
-    "sinon": "*"
+    "hubot-test-helper": "^1.9.0",
+    "mocha": "^6.2.1",
+    "sinon": "*",
+    "sinon-chai": "*"
   }
 }
