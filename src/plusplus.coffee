@@ -80,36 +80,18 @@ module.exports = (robot) ->
 
     # do the {up, down}vote, and figure out what the new score is
 
-    [score, reasonScore] = if lolWord.toLowerCase() == "lol"
+    [userName, reasonScore] = if lolWord.toLowerCase() == "lol"
               scoreKeeper.add(from, room, reason)
 
 
     # if we got a score, then display all the things and fire off events!
-    if score?
-      message = if reason?
-                  if reasonScore == 1 or reasonScore == -1
-                    if score == 1 or score == -1
-                      "#{from} has #{score} point for #{reason}."
-                    else
-                      "#{from} has #{score} points, #{reasonScore} of which is for #{reason}."
-                  else
-                    "#{from} has #{score} points, #{reasonScore} of which are for #{reason}."
+    if reasonScore?
+      message = if reasonScore == 1
+                  "#{msg.message.user.name}: #{reasonScore}"
                 else
-                  if score == 1
-                    "#{from} has #{score} point"
-                  else
-                    "#{from} has #{score} points"
-
+                  "#{msg.message.user.name}: #{reasonScore}"
 
       msg.send message
-
-      robot.emit "plus-one", {
-        name:      from
-        direction: '++'
-        room:      room
-        reason:    reason
-        from:      from
-      }
 
   robot.respond ///
     (?:erase )

@@ -16,13 +16,13 @@ describe('example script', function() {
     beforeEach(function() {
       return co(function*() {
         yield this.room.user.say('Snehit', 'lol');
-        yield this.room.user.say('Snehit', 'lol');
       }.bind(this));
     });
 
     it('should reply to user', function() {
       expect(this.room.messages).to.eql([
-        ['Snehit', 'lol']
+        ['Snehit', 'lol'],
+        ['hubot', 'Snehit: 1']
       ]);
     });
   });
