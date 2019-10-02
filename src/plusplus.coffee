@@ -78,9 +78,7 @@ module.exports = (robot) ->
 
       # do the {up, down}vote, and figure out what the new score is
 
-      [userName, reasonScore] = if lolWord.toLowerCase() == "lol"
-                scoreKeeper.add(from, room, reason)
-
+      [userName, reasonScore] = scoreKeeper.add(from, room, reason)
 
       # if we got a score, then display all the things and fire off events!
       if reasonScore?

@@ -22,9 +22,10 @@
       from = msg.message.user.name.toLowerCase();
       room = msg.message.room;
       if (lolWord) {
-        _ref1 = lolWord.toLowerCase() === "lol" ? scoreKeeper.add(from, room, reason) : void 0, userName = _ref1[0], reasonScore = _ref1[1];
+        _ref1 = scoreKeeper.add(from, room, reason), userName = _ref1[0], reasonScore = _ref1[1];
         if (reasonScore != null) {
           message = reasonScore === 1 ? "" + msg.message.user.name + ": " + reasonScore : "" + msg.message.user.name + ": " + reasonScore;
+          console.log("Result: "+message);
           return msg.send(message);
         }
       }
