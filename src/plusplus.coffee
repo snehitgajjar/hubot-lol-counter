@@ -52,12 +52,12 @@ module.exports = (robot) ->
     # the increment/decrement operator ++ or --
     (\blol\b)
     # optional reason for the plusplus
-    [^$]*)$
+    [^$]*)
     $ # end of line
   ///i, (msg) ->
     # let's get our local vars in place
     # [dummy, name, operator, reason] = msg.match
-    [lolWord, reason] = msg.match
+    [reason, lolWord] = msg.match
     from = msg.message.user.name.toLowerCase()
     room = msg.message.room
 
