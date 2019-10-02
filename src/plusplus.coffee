@@ -82,10 +82,7 @@ module.exports = (robot) ->
 
       # if we got a score, then display all the things and fire off events!
       if reasonScore?
-        message = if reasonScore == 1
-                    "#{msg.message.user.name}: #{reasonScore}"
-                  else
-                    "#{msg.message.user.name}: #{reasonScore}"
+        message = "#{msg.message.user.name}: #{reasonScore}"
 
         msg.send message
 
