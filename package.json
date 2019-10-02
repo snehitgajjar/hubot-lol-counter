@@ -22,9 +22,10 @@
     "url": "https://github.com/snehitgajjar/hubot-lol-counter/issues"
   },
   "dependencies": {
+    "clark": "0.0.6",
+    "co": "^4.6.0",
     "coffee-script": "~1.6",
-    "underscore": ">= 1.0",
-    "clark": "0.0.6"
+    "underscore": ">= 1.0"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",

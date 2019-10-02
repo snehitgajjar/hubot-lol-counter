@@ -74,7 +74,10 @@
       //   reason = lastReason if !reason? && lastReason?
 
       // do the {up, down}vote, and figure out what the new score is
+      console.log(`Hello, ${lolWord} - ${reason}!`);
       [score, reasonScore] = lolWord.toLowerCase() === "lol" ? scoreKeeper.add(from, room, reason) : void 0;
+
+      console.log(`Hello, ${score} - ${reasonScore}!`);
       // if we got a score, then display all the things and fire off events!
       if (score != null) {
         message = reason != null ? reasonScore === 1 || reasonScore === -1 ? score === 1 || score === -1 ? `${name} has ${score} point for ${reason}.` : `${name} has ${score} points, ${reasonScore} of which is for ${reason}.` : `${name} has ${score} points, ${reasonScore} of which are for ${reason}.` : score === 1 ? `${name} has ${score} point` : `${name} has ${score} points`;

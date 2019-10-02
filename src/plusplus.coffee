@@ -61,9 +61,11 @@ module.exports = (robot) ->
     from = msg.message.user.name.toLowerCase()
     room = msg.message.room
 
-    console.log "Hello, #{lolWord} - #{reason}!"
+    console.log "Hello, #{lolWord}!"
+    test = lolWord == "lol"
+    console.log "Hello1, #{test}!"
     # do some sanitizing
-    reason = reason?.trim().toLowerCase()
+    # reason = reason?.trim().toLowerCase()
 
     # if name
     #   if name.charAt(0) == ':'
@@ -77,8 +79,10 @@ module.exports = (robot) ->
     #   reason = lastReason if !reason? && lastReason?
 
     # do the {up, down}vote, and figure out what the new score is
+
     [score, reasonScore] = if lolWord.toLowerCase() == "lol"
               scoreKeeper.add(from, room, reason)
+
 
     # if we got a score, then display all the things and fire off events!
     if score?

@@ -24,29 +24,36 @@
       storageLoaded();
     }
 
-    ScoreKeeper.prototype.getUser = function(user) {
+    ScoreKeeper.prototype.getUser = function(from) {
       var _base, _base1;
-      (_base = this.storage.scores)[user] || (_base[user] = 0);
-      (_base1 = this.storage.reasons)[user] || (_base1[user] = {});
-      return user;
+      (_base = this.storage.scores)[from] || (_base[from] = 0);
+      (_base1 = this.storage.reasons)[from] || (_base1[from] = {});
+      return from;
+    };
+
+    ScoreKeeper.prototype.saveScoreLog = function(from, room, reason) {
+      if (typeof this.storage.log[from] !== "object") {
+        this.storage.log[from] = {};
+      }
+      this.storage.log[from]['lol'] = new Date();
+      return this.storage.last[room] = {
+        from: from,
+        reason: reason
+      };
     };
 
     ScoreKeeper.prototype.saveUser = function(from, room, reason) {
       this.saveScoreLog(from, room, reason);
       this.robot.brain.save();
-      return [this.storage.scores[user], this.storage.reasons[user][reason] || "none"];
+      return [this.storage.scores[from], "none"];
     };
 
     ScoreKeeper.prototype.add = function(from, room, reason) {
       var user, _base, _base1;
-      if (this.validate(user, from)) {
-        user = this.getUser("lol");
+      if (this.validate("lol", from)) {
+        user = this.getUser(from);
         this.storage.scores[user]++;
-        (_base = this.storage.reasons)[user] || (_base[user] = {});
-        if (reason) {
-          (_base1 = this.storage.reasons[user])[reason] || (_base1[reason] = 0);
-          this.storage.reasons[user][reason]++;
-        }
+
         return this.saveUser(from, room, reason);
       } else {
         return [null, null];
@@ -91,17 +98,6 @@
     ScoreKeeper.prototype.reasonsForUser = function(user) {
       user = this.getUser(user);
       return this.storage.reasons[user];
-    };
-
-    ScoreKeeper.prototype.saveScoreLog = function(from, room, reason) {
-      if (typeof this.storage.log[from] !== "object") {
-        this.storage.log[from] = {};
-      }
-      this.storage.log[from]['lol'] = new Date();
-      return this.storage.last[room] = {
-        user: user,
-        reason: reason
-      };
     };
 
     ScoreKeeper.prototype.last = function(room) {

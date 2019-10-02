@@ -26,26 +26,27 @@ class ScoreKeeper
     storageLoaded() # just in case storage was loaded before we got here
 
 
-  getUser: (user) ->
-    @storage.scores[user] ||= 0
-    @storage.reasons[user] ||= {}
-    user
+  getUser: (from) ->
+    @storage.scores[from] ||= 0
+    from
+
+  saveScoreLog: (from, room, reason) ->
+    unless typeof @storage.log[from] == "object"
+      @storage.log[from] = {}
+
+    @storage.log[from]['lol'] = new Date()
+    @storage.last[room] = {from: from, reason: reason}
 
   saveUser: (from, room, reason) ->
     @saveScoreLog(from, room, reason)
     @robot.brain.save()
 
-    [@storage.scores[user], @storage.reasons[user][reason] || "none"]
+    [@storage.scores[from], "none"]
 
   add: (from, room, reason) ->
-    if @validate(user, from)
-      user = @getUser("lol")
+    if @validate("lol", from)
+      user = @getUser(from)
       @storage.scores[user]++
-      @storage.reasons[user] ||= {}
-
-      if reason
-        @storage.reasons[user][reason] ||= 0
-        @storage.reasons[user][reason]++
 
       @saveUser(from, room, reason)
     else
@@ -92,7 +93,7 @@ class ScoreKeeper
       @storage.log[from] = {}
 
     @storage.log[from]['lol'] = new Date()
-    @storage.last[room] = {user: user, reason: reason}
+    @storage.last[room] = {from: from, reason: reason}
 
   last: (room) ->
     last = @storage.last[room]
