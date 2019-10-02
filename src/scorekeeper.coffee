@@ -39,7 +39,7 @@ class ScoreKeeper
 
   add: (from, room, reason) ->
     if @validate(user, from)
-      user = @getUser('lol')
+      user = @getUser("lol")
       @storage.scores[user]++
       @storage.reasons[user] ||= {}
 
