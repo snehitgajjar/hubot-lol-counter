@@ -80,7 +80,7 @@
       console.log(`Hello, ${score} - ${reasonScore}!`);
       // if we got a score, then display all the things and fire off events!
       if (score != null) {
-        message = reason != null ? reasonScore === 1 || reasonScore === -1 ? score === 1 || score === -1 ? `${name} has ${score} point for ${reason}.` : `${name} has ${score} points, ${reasonScore} of which is for ${reason}.` : `${name} has ${score} points, ${reasonScore} of which are for ${reason}.` : score === 1 ? `${name} has ${score} point` : `${name} has ${score} points`;
+        message = reason != null ? reasonScore === 1 || reasonScore === -1 ? score === 1 || score === -1 ? `${from} has ${score} point for ${reason}.` : `${from} has ${score} points, ${reasonScore} of which is for ${reason}.` : `${from} has ${score} points, ${reasonScore} of which are for ${reason}.` : score === 1 ? `${from} has ${score} point` : `${from} has ${score} points`;
         msg.send(message);
         return robot.emit("plus-one", {
           name: from,

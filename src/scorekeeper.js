@@ -25,9 +25,8 @@
     }
 
     ScoreKeeper.prototype.getUser = function(from) {
-      var _base, _base1;
+      var _base;
       (_base = this.storage.scores)[from] || (_base[from] = 0);
-      (_base1 = this.storage.reasons)[from] || (_base1[from] = {});
       return from;
     };
 
@@ -49,11 +48,10 @@
     };
 
     ScoreKeeper.prototype.add = function(from, room, reason) {
-      var user, _base, _base1;
+      var user;
       if (this.validate("lol", from)) {
         user = this.getUser(from);
         this.storage.scores[user]++;
-
         return this.saveUser(from, room, reason);
       } else {
         return [null, null];
@@ -98,6 +96,17 @@
     ScoreKeeper.prototype.reasonsForUser = function(user) {
       user = this.getUser(user);
       return this.storage.reasons[user];
+    };
+
+    ScoreKeeper.prototype.saveScoreLog = function(from, room, reason) {
+      if (typeof this.storage.log[from] !== "object") {
+        this.storage.log[from] = {};
+      }
+      this.storage.log[from]['lol'] = new Date();
+      return this.storage.last[room] = {
+        from: from,
+        reason: reason
+      };
     };
 
     ScoreKeeper.prototype.last = function(room) {
