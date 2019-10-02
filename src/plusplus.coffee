@@ -61,6 +61,7 @@ module.exports = (robot) ->
     from = msg.message.user.name.toLowerCase()
     room = msg.message.room
 
+    console.log "Hello, #{lolWord} - #{reason}!"
     # do some sanitizing
     reason = reason?.trim().toLowerCase()
 
