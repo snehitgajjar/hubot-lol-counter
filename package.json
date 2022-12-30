@@ -31,7 +31,7 @@
     "babel-register": "^6.26.0",
     "chai": "*",
     "hubot-test-helper": "^1.9.0",
-    "mocha": "^6.2.1",
+    "mocha": "^10.2.0",
     "sinon": "*",
     "sinon-chai": "*"
   }
